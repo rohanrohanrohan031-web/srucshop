@@ -1,0 +1,37 @@
+<?php
+$conn = new mysqli("localhost","root","","sr_uc_shop");
+
+$result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
+?>
+
+<h2>SR UC SHOP - ADMIN PANEL</h2>
+
+<table border="1" cellpadding="10">
+<tr>
+<th>ID</th>
+<th>UID</th>
+<th>Package</th>
+<th>TrxID</th>
+<th>Sender</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<?php while($row = $result->fetch_assoc()){ ?>
+<tr>
+<td><?php echo $row['id']; ?></td>
+<td><?php echo $row['uid']; ?></td>
+<td><?php echo $row['package']; ?></td>
+<td><?php echo $row['trxid']; ?></td>
+<td><?php echo $row['sender']; ?></td>
+<td><?php echo $row['status']; ?></td>
+<td>
+
+<a href="update.php?id=<?php echo $row['id']; ?>&status=Approved">✅ Approve</a> |
+<a href="update.php?id=<?php echo $row['id']; ?>&status=Rejected">❌ Reject</a>
+
+</td>
+</tr>
+<?php } ?>
+
+</table>
